@@ -1,0 +1,44 @@
+# Configuração real — senhas, links e caminhos internos da rede corporativa.
+# Nunca sobe. Cada automação tem seu .env (alguns dentro de Config_Cg/); os
+# arquivos *.exemplo ficam versionados como modelo.
+.env
+**/.env
+
+# Gerado em tempo de execução pelos robôs — logs, locks e diagnósticos
+logs/
+**/logs/
+runtime/
+**/runtime/
+erro_fatal.txt
+**/erro_fatal.txt
+historico.txt
+__pycache__/
+*.pyc
+
+# Dados operacionais — filas, resultados e histórico gerados a cada execução
+# (pedidos reais de fornecedores; não faz sentido versionar)
+Robôs Bureau/Aprovador/Fila_Aprovacao/
+Robôs Bureau/Aprovador/Historico_Aprovacoes/
+Robôs Bureau/Preparador/Query_Aprovar/
+Robôs Bureau/Impressão/Base Geral/
+Robôs Bureau/Impressão/Colmeia/
+Robôs Bureau/Impressão/HISTORICO DE APROVAÇÃO/
+Robôs Bureau/Impressão/IMPRESSOS/
+
+# Chrome + Chromedriver empacotados — pesados (>100 MB, o GitHub recusa) e
+# específicos da máquina. Copiados da rede na 1ª execução de cada PC.
+**/Bin/
+Confg/
+
+# Backups e temporários
+*.bak
+*.tmp
+~$*
+
+# Lixo de editor / sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
