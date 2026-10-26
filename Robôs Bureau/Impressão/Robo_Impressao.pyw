@@ -995,6 +995,49 @@ def _proximo_codigo_erro():
     codigo_legivel = f"{agora.strftime('%d.%m.%y')}_{nome_pasta}"
     return nome_pasta, codigo_legivel
 
+DIAS_MANTER_DIAGNOSTICO = 10
+
+def _limpar_arquivos_diagnostico_antigos():
+    try:
+        pasta_erro_base = os.path.join(_pasta_logs, "ERRO")
+        if not os.path.isdir(pasta_erro_base):
+            return
+        limite = time.time() - (DIAS_MANTER_DIAGNOSTICO * 24 * 60 * 60)
+        removidos = 0
+        for ano in os.listdir(pasta_erro_base):
+            pasta_ano = os.path.join(pasta_erro_base, ano)
+            if not os.path.isdir(pasta_ano):
+                continue
+            for mes in os.listdir(pasta_ano):
+                pasta_mes = os.path.join(pasta_ano, mes)
+                if not os.path.isdir(pasta_mes):
+                    continue
+                for dia in os.listdir(pasta_mes):
+                    pasta_dia = os.path.join(pasta_mes, dia)
+                    if not os.path.isdir(pasta_dia):
+                        continue
+                    try:
+                        if os.path.getmtime(pasta_dia) < limite:
+                            shutil.rmtree(pasta_dia)
+                            removidos += 1
+                    except Exception:
+                        continue
+                try:
+                    if not os.listdir(pasta_mes):
+                        os.rmdir(pasta_mes)
+                except Exception:
+                    pass
+            try:
+                if not os.listdir(pasta_ano):
+                    os.rmdir(pasta_ano)
+            except Exception:
+                pass
+        if removidos:
+            registrar_log([f"🧹  Limpeza automática: {removidos} pasta(s) de dia com mais "
+                           f"de {DIAS_MANTER_DIAGNOSTICO} dias removidas."])
+    except Exception as e:
+        registrar_erro_permanente(f"LIMPEZA DIAGNÓSTICO -- {e}")
+
 def _listar_campos_da_pagina(driver):
     linhas = []
     try:
@@ -3343,6 +3386,7 @@ class JanelaImpressao:
 
     def _executar_fluxo(self, data_texto, setor, modelo, impressora):
         _gerenciar_log()
+        _limpar_arquivos_diagnostico_antigos()
         registrar_log([f"🖨️  Iniciando impressão -- Data: {data_texto} | Setor: {setor} | "
                        f"Etiqueta: {modelo} | Impressora: {impressora}"])
         try:

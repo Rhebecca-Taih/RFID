@@ -118,7 +118,8 @@ estavam, sem gerar uma nova tentativa de impressão.
 ⋆˚✮ O histórico de erros técnicos completo fica em
 `logs/historico_erros.txt`. Cada falha no portal também gera uma pasta
 própria em `logs/ERRO/`, com captura de tela, HTML da página e um
-registro dos seletores carregados naquele instante.
+registro dos seletores carregados naquele instante. As pastas são mantidas
+por 10 dias.
 
 ---
 
@@ -186,7 +187,8 @@ necessário porque o filtro às vezes retém o site do pedido anterior.
 Cada erro no portal gera uma pasta própria (organizada por dia,
 numerada sequencialmente) com captura de tela, HTML da página e um
 snapshot do JSON de seletores exatamente como estava carregado em
-memória naquele instante.
+memória naquele instante. A cada lote, as pastas com mais de 10 dias são
+removidas automaticamente.
 
 #### ⋆ Histórico versionado
 

@@ -119,7 +119,7 @@ que o sistema produz:
 crítico: cada falha de automação gera uma pasta numerada dentro de
 `logs/ERRO/<ano>/<mês>/<dia>`, com print da tela, HTML da página e um
 registro técnico do momento exato da falha — use esse material para
-diagnosticar o caso antes de reportar.
+diagnosticar o caso antes de reportar. As pastas são mantidas por 10 dias.
 
 ---
 
@@ -212,7 +212,8 @@ e sinalizar atenção para o ciclo inteiro.
 #### ⋆ Diagnóstico
 
 Captura print de tela, HTML da página e contexto técnico sempre que uma
-ação de automação falha, organizados por data em `logs/ERRO/`.
+ação de automação falha, organizados por data em `logs/ERRO/`. As pastas
+com mais de 10 dias são removidas automaticamente.
 
 #### ⋆ Continuidade com a rede indisponível
 

@@ -2470,7 +2470,7 @@ def _esta_em_pausa(agora=None):
         return HORA_ENCERRAR <= hora_atual < HORA_RETOMAR
     return hora_atual >= HORA_ENCERRAR or hora_atual < HORA_RETOMAR
 
-DIAS_MANTER_DIAGNOSTICO       = 30
+DIAS_MANTER_DIAGNOSTICO       = 10
 INTERVALO_LIMPEZA_DIAGNOSTICO = 24 * 60 * 60
 
 def _limpar_arquivos_diagnostico_antigos():

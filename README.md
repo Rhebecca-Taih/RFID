@@ -64,12 +64,13 @@ processamento de onde a anterior parou.
   Chromedriver da rede na primeira execução.
 - **Diagnóstico completo de falhas**: cada erro no portal gera uma pasta com
   captura de tela, o HTML da página, os seletores carregados e a exceção do
-  Selenium, organizados por data e removidos após dois dias.
+  Selenium, organizados por data e removidos após dez dias.
 - **Seletores em arquivo JSON separado**: quando o portal muda, ajusta-se o
   JSON, não o código. Cada clique acontece num único comando JavaScript
   atômico (localizar, rolar até a vista e clicar).
 - **Detecção de sessão encerrada**: se o navegador é finalizado durante um
-  lote, o ciclo é interrompido antes de gravar qualquer status.
+  lote, o ciclo é interrompido, o resultado parcial é salvo e a nova tentativa
+  continua do ponto em que parou.
 - **Continuidade sem rede**: quando a pasta de rede fica indisponível, os robôs
   seguem gravando localmente e registram o período de indisponibilidade.
 - **Pausa noturna**: encerra às 20h e retoma às 7h30, sem finalizar o processo.
